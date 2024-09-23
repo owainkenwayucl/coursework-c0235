@@ -15,7 +15,7 @@
     ansible.builtin.shell: build-index data/index.html > data/targets #Invokes the wrapped web scraper script
 
 - name: download the individual zip datafiles
-  hosts: aws_ec2
+  hosts: localhost
   vars:
     targets: "{{lookup('file','data/targets')|split('\n')}}"
   tasks:
