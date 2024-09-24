@@ -8,7 +8,7 @@
   - name: Download 1850-1859 dataset
     ansible.builtin.get_url:
       dest: /data/almalinux/data/1850_1859.zip
-      url: https://oakminioapi.arc-general.condenser.arc.ucl.ac.uk/britishlibrary/1850_1859.zip
+      url: https://s3.ds4eng.condenser.arc.ucl.ac.uk/britishlibrary/1850_1859.zip
   - name: Unpack the archive
     ansible.builtin.unarchive:
       remote_src: true
