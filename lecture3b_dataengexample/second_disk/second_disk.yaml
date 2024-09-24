@@ -39,3 +39,8 @@
       state: link
       src: /data/almalinux
       owner: almalinux
+  - name: Install unzip (we'll need it for examples).
+    ansible.builtin.dnf:
+      name:
+        - unzip
+      state: latest
