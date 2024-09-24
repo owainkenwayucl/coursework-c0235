@@ -5,8 +5,9 @@
       - 1850-1859
   tasks:
   - name: Run the analysis on the target files, and time it
-    ansible.builtin.shell: analyse data/{{item}}.zip arms
-    register result
+    ansible.builtin.shell: "analyse /data/almalinux/data/{{item}}.zip arms"
+    register: result
+    with_items: "{{ targets }}"
   - name: print the result when the playbook is run
     ansible.builtin.debug:
       var: result
