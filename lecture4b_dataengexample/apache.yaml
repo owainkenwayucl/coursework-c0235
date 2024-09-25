@@ -1,0 +1,28 @@
+- name: Set up apache on host
+  hosts: mgmtnode
+  become: true
+  become_user: root
+  tasks:
+  - name: Install web server packages
+    ansible.builtin.yum:
+      name: 
+        - python
+        - python-pip
+        - unzip
+        - wget
+        - httpd
+      state: latest
+  - name: Set up the web server to serve from ~/data
+    ansible.builtin.copy:
+      src: cluster_apache.conf
+      dest: /etc/httpd/conf.d/data.conf
+  - name: Allow apache to view files in /data
+    community.general.sefcontext:
+    # This is an additional security setting on "security enhanced linux" to allow us to serve outside the usual HTTP server area.
+      target: '/data/almalinux/data'
+      setype: httpd_sys_content_t
+      state: present
+  - name: Start service httpd
+    ansible.builtin.service:
+      name: httpd
+      state: restarted
