@@ -1,5 +1,5 @@
 - name: Gather the list of data to download
-  hosts: localhost
+  hosts: all
   tasks:
   - name: Create data folder
     ansible.builtin.file:
@@ -15,7 +15,7 @@
     ansible.builtin.shell: build-index data/index.html > data/targets #Invokes the wrapped web scraper script
 
 - name: download the individual zip datafiles
-  hosts: localhost
+  hosts: all
   vars:
     targets: "{{lookup('file','data/targets')|split('\n')}}"
   tasks:
