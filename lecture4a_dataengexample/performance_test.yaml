@@ -2,10 +2,10 @@
   hosts: all
   vars:
     targets:
-      - 1850-1859
+      - "1850_1859"
   tasks:
   - name: Run the analysis on the target files, and time it
-    ansible.builtin.shell: "analyse /data/almalinux/data/{{item}}.zip arms"
+    ansible.builtin.shell: "/home/almalinux/comp-235-lect-4/bin/python3 -c 'from dataeng.analysis import analysis_entry as main;main()' /data/almalinux/data/{{item}} arms"
     register: result
     with_items: "{{ targets }}"
   - name: print the result when the playbook is run
