@@ -9,7 +9,7 @@
         - epel-release
       state: latest
   - name: Enable crb
-    ansible.builtin.shell: dnf config-manager --set enabled crb
+    ansible.builtin.shell: dnf config-manager --set-enabled crb
   - name: Install quality of life tools
     ansible.builtin.dnf:
       name:
