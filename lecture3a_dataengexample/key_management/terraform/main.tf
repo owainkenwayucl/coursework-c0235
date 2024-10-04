@@ -1,5 +1,5 @@
 data "local_file" "new_public_key" {
-  filename = "new_key.pub"
+  filename = var.keyfile
 }
 
 resource "harvester_ssh_key" "new_key" {
