@@ -1,23 +1,14 @@
 - name: Gather the list of data to download
   hosts: all
   tasks:
-  - name: Create data folder
-    ansible.builtin.file:
-      path: data/
-      state: directory
-      mode: '0755' 
-  - name: retrieve index
-     #Download all the index data from the British library open books archive
-    ansible.builtin.get_url:
-      url:  "https://bl.iro.bl.uk/collections/b7fd2482-debd-4495-9494-72aa2ead00bb?utf8=1&sort=year_published_isi+asc&per_page=20&locale=en"
-      dest: data/index.html
   - name: create list of target datafiles
-    ansible.builtin.shell: build-index data/index.html > data/targets #Invokes the wrapped web scraper script
+    ansible.builtin.shell: "mc ls ds4eng/britishlibrary | awk '{print $6}' > .targets"
+    delegate_to: 127.0.0.1
 
 - name: download the individual zip datafiles
   hosts: all
   vars:
-    targets: "{{lookup('file','data/targets')|split('\n')}}"
+    targets: "{{lookup('file','.targets')|split('\n')}}"
   tasks:
   - name: Create temp folder for incomplete downloads on larger volume
     ansible.builtin.file:
@@ -25,11 +16,8 @@
       state: directory
       mode: '0755' 
   - name: Fetch the individual files 
-  # This is a minor faff compared to the command line
-  # cat targets | xargs -n1 wget
-  # but worth it for stability
     ansible.builtin.get_url:
-      url:   "{{ item }}"
+      url:   "https://s3.ds4eng.condenser.arc.ucl.ac.uk/britishlibrary/{{ item }}"
       dest: data
       tmp_dest: data/tmp
     loop: "{{targets}}"
