@@ -3,7 +3,7 @@ variable namespace {
 #  default = "ds4eng-ns"
 }
 
-variable username {
+variable keyname {
   type = string
 #  default = ""
 }
