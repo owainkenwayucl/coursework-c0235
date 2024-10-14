@@ -11,10 +11,10 @@
       group: almalinux
       mode: 0755
   - name: Install web server packages
-    ansible.builtin.yum:
+    ansible.builtin.dnf:
       name: 
-        - python
-        - python-pip
+        - python3
+        - python3-pip
         - unzip
         - wget
         - httpd
@@ -33,3 +33,4 @@
     ansible.builtin.service:
       name: httpd
       state: restarted
+      enabled: true
