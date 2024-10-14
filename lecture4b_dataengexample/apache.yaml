@@ -5,11 +5,27 @@
   tasks:
   - name: Create data directory
     ansible.builtin.file:
-      path: /home/almalinux/data
+      path: /data
+      state: directory
+  - name: Create data directory
+    ansible.builtin.file:
+      path: /data/almalinux
       state: directory
       owner: almalinux
       group: almalinux
       mode: 0755
+  - name: Create data directory
+    ansible.builtin.file:
+      path: /data/almalinux/data
+      state: directory
+      owner: almalinux
+      group: almalinux
+      mode: 0755
+  - name: sym link in home directory
+    ansible.builtin.file:
+      path: /home/almalinux/data
+      src: /data/almalinux/data
+      state: link
   - name: Install web server packages
     ansible.builtin.dnf:
       name: 
