@@ -40,11 +40,7 @@
       src: cluster_apache.conf
       dest: /etc/httpd/conf.d/data.conf
   - name: Set SELinux Context
-    community.general.sefcontext:
-    # This is an additional security setting on "security enhanced linux" to allow us to serve outside the usual HTTP server area.
-      target: '/data/almalinux/data'
-      setype: httpd_sys_content_t
-      state: present
+    ansible.builtin.shell: 'semanage fcontext -a -t httpd_sys_content_t "/data/almalinux/data(/.*)?"'
   - name: Apply policies
     ansible.builtin.shell: 'restorecon -Rv /data/almalinux/data'
   - name: Start service httpd
