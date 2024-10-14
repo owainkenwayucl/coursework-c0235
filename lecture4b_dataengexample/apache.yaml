@@ -3,6 +3,13 @@
   become: true
   become_user: root
   tasks:
+  - name: Create data directory
+    ansible.builtin.file:
+      path: /home/almalinux/data
+      state: directory
+      owner: almalinux
+      group: almalinux
+      mode: 0755
   - name: Install web server packages
     ansible.builtin.yum:
       name: 
