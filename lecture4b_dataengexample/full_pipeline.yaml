@@ -8,4 +8,4 @@
 - import_playbook: download_data.yaml
 - import_playbook: prepare_pipeline.yaml
 - import_playbook: do_work.yaml
-- import_playbool: reduce.yaml
+- import_playbook: reduce.yaml
