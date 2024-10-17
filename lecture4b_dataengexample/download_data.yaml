@@ -12,7 +12,7 @@
   - name: Unpack the archive
     ansible.builtin.unarchive:
       remote_src: true
-      src: /data/almalinux/data/1850_1859.zip
+      src: /data/almalinux/data/1810_1819.zip
       dest: /data/almalinux/data
   - name: create the manifest file
     ansible.builtin.shell:
