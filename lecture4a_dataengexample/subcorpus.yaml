@@ -27,7 +27,7 @@
       state: directory
   - name: set up a small sub-corpus of targets for performance measurement
     ansible.builtin.copy:
-      src: "/data/almalinux/data/1850_1859/{{item}}_dat.zip"
+      src: "/data/almalinux/1850_1859/{{item}}_dat.zip"
       dest: "/data/almalinux/data/subcorpus/{{item}}_dat.zip"
       remote_src: yes
     loop: "{{subcorpus}}"
