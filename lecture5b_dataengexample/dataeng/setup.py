@@ -9,7 +9,7 @@ setup(name='dataeng',
       author_email='o.kenway@ucl.ac.uk',
       url='TBC',
       packages=['dataeng'],
-      install_requires=['bs4','requests', 'mr4mp', 'lxml'],
+      install_requires=['bs4','requests', 'mr4mp', 'lxml', 'minio'],
       entry_points={'console_scripts': ['build-index = dataeng.gather:parse_index_entry',
                                         'analyse = dataeng.analysis:analysis_entry',
                                         'combine = dataeng.combine:combine_entry'
