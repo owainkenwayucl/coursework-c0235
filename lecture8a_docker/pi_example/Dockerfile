@@ -10,5 +10,5 @@ RUN dnf install -y wget
 RUN wget https://raw.githubusercontent.com/owainkenwayucl/coursework-c0235/refs/heads/main/lecture8a_docker/pi_example/pi.py
 
 # Run it.
-CMD python3 pi.py
+CMD ["python3", "pi.py"]
 
