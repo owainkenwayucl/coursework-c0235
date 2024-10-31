@@ -17,5 +17,11 @@ RUN bash setup.sh
 # Agree to terms for FashionMNIST dataset.
 ENV DATADEPS_ALWAYS_ACCEPT=true
 
+# Create entrypoint script
+COPY --chmod=755 <<EOF /entrypoint.sh
+#!/bin/bash
+julia --project="/JuliaML/Fashion" improved.jl && cp *.bson /data
+EOF
+
 # Run it.
-CMD julia --project="${PWD}" improved.jl && cp *.bson /data
+ENTRYPOINT ["/entrypoint.sh"]
